@@ -1,0 +1,279 @@
+@import '@fontsource/atkinson-hyperlegible/400.css';
+@import '@fontsource/atkinson-hyperlegible/700.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Accessibility-First Design System for Educational Platform */
+
+@layer base {
+  :root {
+    /* Primary: Deep Navy Blue - Calming, trustworthy, high contrast */
+    --primary: 220 60% 25%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 220 60% 20%;
+    
+    /* Secondary: Warm Amber - Attention, action, warmth */
+    --secondary: 38 92% 50%;
+    --secondary-foreground: 220 60% 15%;
+    
+    /* Background: Off-white for reduced eye strain */
+    --background: 220 20% 98%;
+    --foreground: 220 25% 12%;
+    
+    /* Card surfaces */
+    --card: 0 0% 100%;
+    --card-foreground: 220 25% 12%;
+    
+    /* Muted surfaces */
+    --muted: 220 15% 92%;
+    --muted-foreground: 220 15% 40%;
+    
+    /* Accent */
+    --accent: 200 80% 45%;
+    --accent-foreground: 0 0% 100%;
+    
+    /* Success, warning, error with accessible contrast */
+    --success: 145 65% 35%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 220 60% 15%;
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 0 0% 100%;
+    
+    /* Borders and inputs */
+    --border: 220 20% 80%;
+    --input: 220 20% 85%;
+    --ring: 220 60% 45%;
+    
+    /* Focus ring for accessibility */
+    --focus-ring: 220 80% 50%;
+    --focus-ring-offset: 0 0% 100%;
+    
+    /* High contrast mode colors */
+    --high-contrast-bg: 0 0% 0%;
+    --high-contrast-fg: 0 0% 100%;
+    --high-contrast-accent: 60 100% 50%;
+    
+    --radius: 0.75rem;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 25% 12%;
+    
+    /* Font scaling for accessibility */
+    --font-scale: 1;
+    
+    /* Sidebar colors */
+    --sidebar-background: 220 25% 15%;
+    --sidebar-foreground: 220 10% 95%;
+    --sidebar-primary: 38 92% 50%;
+    --sidebar-primary-foreground: 220 60% 15%;
+    --sidebar-accent: 220 25% 22%;
+    --sidebar-accent-foreground: 220 10% 95%;
+    --sidebar-border: 220 20% 25%;
+    --sidebar-ring: 220 80% 50%;
+  }
+
+  .dark,
+  .high-contrast {
+    --background: 220 25% 8%;
+    --foreground: 220 10% 95%;
+    --card: 220 25% 12%;
+    --card-foreground: 220 10% 95%;
+    --muted: 220 20% 18%;
+    --muted-foreground: 220 15% 70%;
+    --border: 220 20% 25%;
+    --input: 220 20% 22%;
+    --popover: 220 25% 12%;
+    --popover-foreground: 220 10% 95%;
+    --focus-ring-offset: 220 25% 8%;
+  }
+
+  .high-contrast {
+    --primary: 200 100% 60%;
+    --secondary: 60 100% 50%;
+    --accent: 180 100% 50%;
+    --border: 0 0% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    font-size: calc(16px * var(--font-scale));
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Atkinson Hyperlegible', system-ui, sans-serif;
+    line-height: 1.6;
+    letter-spacing: 0.01em;
+  }
+
+  /* Enhanced focus styles for accessibility */
+  *:focus-visible {
+    @apply outline-none ring-4 ring-[hsl(var(--focus-ring))] ring-offset-2 ring-offset-[hsl(var(--focus-ring-offset))];
+    transition: box-shadow 0.15s ease-out;
+  }
+
+  /* Skip to main content link */
+  .skip-link {
+    @apply absolute -top-12 left-4 z-[9999] bg-primary text-primary-foreground px-6 py-3 rounded-lg font-bold;
+    transition: top 0.2s ease;
+  }
+
+  .skip-link:focus {
+    @apply top-4;
+  }
+
+  /* Large touch targets */
+  button,
+  [role="button"],
+  input,
+  select,
+  textarea,
+  a {
+    min-height: 48px;
+    min-width: 48px;
+  }
+
+  /* Screen reader only class */
+  .sr-only {
+    @apply absolute w-px h-px p-0 -m-px overflow-hidden whitespace-nowrap border-0;
+    clip: rect(0, 0, 0, 0);
+  }
+
+  /* Reduce motion for vestibular disorders */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Accessible card component */
+  .a11y-card {
+    @apply bg-card text-card-foreground rounded-xl border-2 border-border p-6 shadow-lg;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .a11y-card:hover {
+    @apply shadow-xl;
+    transform: translateY(-2px);
+  }
+
+  /* High visibility button */
+  .a11y-btn {
+    @apply inline-flex items-center justify-center gap-3 px-6 py-4 rounded-xl font-bold text-lg;
+    @apply transition-all duration-200 ease-out;
+    @apply focus-visible:ring-4 focus-visible:ring-offset-2;
+  }
+
+  .a11y-btn-primary {
+    @apply bg-primary text-primary-foreground;
+    @apply hover:bg-[hsl(var(--primary-hover))] active:scale-[0.98];
+  }
+
+  .a11y-btn-secondary {
+    @apply bg-secondary text-secondary-foreground;
+    @apply hover:brightness-110 active:scale-[0.98];
+  }
+
+  .a11y-btn-outline {
+    @apply border-2 border-primary text-primary bg-transparent;
+    @apply hover:bg-primary hover:text-primary-foreground;
+  }
+
+  /* Accessible input */
+  .a11y-input {
+    @apply w-full px-5 py-4 text-lg rounded-xl border-2 border-input bg-background;
+    @apply placeholder:text-muted-foreground;
+    @apply focus:border-primary focus:ring-4 focus:ring-primary/20;
+    @apply transition-all duration-200;
+  }
+
+  /* Screen reader announcements */
+  .a11y-announce {
+    @apply sr-only;
+  }
+
+  [aria-live="polite"],
+  [aria-live="assertive"] {
+    @apply sr-only;
+  }
+}
+
+@layer utilities {
+  /* Text size utilities for accessibility */
+  .text-scale-sm {
+    --font-scale: 0.875;
+  }
+  
+  .text-scale-base {
+    --font-scale: 1;
+  }
+  
+  .text-scale-lg {
+    --font-scale: 1.125;
+  }
+  
+  .text-scale-xl {
+    --font-scale: 1.25;
+  }
+  
+  .text-scale-2xl {
+    --font-scale: 1.5;
+  }
+
+  /* Animation utilities */
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.4s ease-out forwards;
+  }
+
+  .animate-pulse-gentle {
+    animation: pulseGentle 2s ease-in-out infinite;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from { 
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to { 
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pulseGentle {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+  /* Gradient backgrounds */
+  .gradient-primary {
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(220 60% 35%) 100%);
+  }
+
+  .gradient-hero {
+    background: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(220 20% 94%) 100%);
+  }
+}

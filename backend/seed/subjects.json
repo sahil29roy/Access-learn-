@@ -1,0 +1,37 @@
+[
+  {
+    "name": "English Literature",
+    "code": "ENG101",
+    "description": "Study of classic and contemporary English literature",
+    "category": "Language Arts",
+    "level": "High School"
+  },
+  {
+    "name": "English Poetry",
+    "code": "ENG201",
+    "description": "Analysis and appreciation of English poetry",
+    "category": "Language Arts",
+    "level": "High School"
+  },
+  {
+    "name": "Creative Writing",
+    "code": "ENG301",
+    "description": "Development of creative writing skills",
+    "category": "Language Arts",
+    "level": "High School"
+  },
+  {
+    "name": "Basic Mathematics",
+    "code": "MATH101",
+    "description": "Fundamental mathematical concepts",
+    "category": "Mathematics",
+    "level": "Middle School"
+  },
+  {
+    "name": "Biology",
+    "code": "SCI101",
+    "description": "Study of living organisms and life processes",
+    "category": "Science",
+    "level": "High School"
+  }
+]
